@@ -1,0 +1,89 @@
+1]
+class Demo{
+  
+    public static void main(String[] args) {
+        int n = 10;
+        if(n>0){
+        System.out.println(n + " is positive number");
+}
+}
+}
+
+2]
+class Demo{
+  
+    public static void main(String[] args) {
+        int n = -10;
+        if(n<0){
+        System.out.println(n + " is Negative number");
+}
+}
+}
+
+3]
+class Demo{
+  
+    public static void main(String[] args) {
+        int n = 10;
+        if(n%==0){
+        System.out.println(n + " is Even number");
+        }
+        else{
+        System.out.println(n + " is Odd number");
+        }
+}
+}
+
+4]class Demo{
+  
+    public static void main(String[] args) {
+        int time = 9;
+        if(time>=5 && time<=12){
+        System.out.println("Good Morning");
+         }
+        else{
+           }
+}
+}
+
+5]
+class Area{
+  
+    public static void main(String[] args) {
+        int side = 4;
+        int area=side*side;
+        System.out.println("Area of Square is"+area);
+
+}
+}
+
+6]
+class Area{
+  
+    public static void main(String[] args) {
+        int l = 4;
+        int b=6
+        int area=l*b;
+        System.out.println("Area of Rectangle is"+area);
+
+}
+}
+
+7]
+class Area{
+  
+    public static void main(String[] args) {
+        int a = 2;
+        int b = 3;
+        int c = 5;
+        if(a>b && a>c){
+        System.out.println("A is largest Number");
+}
+        else if(b>c %% b>a){
+        
+
+        System.out.println("Area of Square is"+area);
+
+}
+}
+
