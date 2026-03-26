@@ -1,0 +1,39 @@
+1.
+SELECT cname, rating
+FROM customers
+WHERE rating >= ANY (
+    SELECT rating
+    FROM customers
+    WHERE cname = 'Serres'
+);
+
+2.
+SELECT s.sname, s.city
+FROM salespeople s
+WHERE s.city <> ALL (
+    SELECT c.city
+    FROM customers c
+    WHERE c.snum = s.snum
+);
+
+3.
+SELECT *
+FROM orders
+WHERE amt > ANY (
+    SELECT amt
+    FROM orders o
+    JOIN customers c 
+        ON o.cnum = c.cnum
+    WHERE c.city = 'London'
+);
+
+4.
+SELECT *
+FROM orders
+WHERE amt > (
+    SELECT MAX(o.amt)
+    FROM orders o
+    JOIN customers c 
+        ON o.cnum = c.cnum
+    WHERE c.city = 'London'
+);

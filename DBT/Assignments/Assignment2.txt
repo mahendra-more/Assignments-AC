@@ -1,0 +1,13 @@
+1.
+In the Customers table, the primary key is Cnum(Customer Number).
+
+2.
+Rating is the 4th column.
+
+3.
+  A row is also called a record or tuple.
+  A column is also called a field or attribute
+
+4.
+By default, SQL tables are unordered sets of records.
+There’s no inherent “first” or “last” row unless you explicitly define an order.

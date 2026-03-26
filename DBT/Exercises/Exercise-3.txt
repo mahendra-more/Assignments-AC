@@ -1,0 +1,58 @@
+1.Display all the Supplier names with the initial letter capital.
+
+SELECT INITCAP(SNAME) AS SupplierName
+FROM S;
+
+2.Display all the Supplier names in upper case. 
+
+SELECT UPPER(SNAME) AS SupplierName
+FROM S;
+
+3.Display all the Supplier names in lower case.
+
+SELECT LOWER(SNAME) AS SupplierName
+FROM S;
+
+4.Display all the Supplier names padded to 25 characters, with spaces on the left. 
+
+SELECT LPAD(SNAME, 25, ' ') AS PaddedName
+FROM S;
+
+5.Display all the Supplier names (with ‘la’ replaced by ‘ro’). 
+ HINT: REPLACE.
+
+SELECT REPLACE(SNAME, 'la', 'ro') AS ModifiedName
+FROM S;
+
+6.Implement the above command such that ‘l’ is replaced with ‘r’ and ‘a’ is replaced
+with ‘o’.
+
+SELECT REPLACE(REPLACE(SNAME, 'l', 'r'), 'a', 'o') AS ModifiedName
+FROM S;
+
+7.Display the Supplier names and the lengths of the names.
+
+SELECT SNAME, LENGTH(SNAME) AS NameLength
+FROM S;
+
+8.Use the soundex function to search for a supplier by the name of ‘BLOKE’.
+
+SELECT * 
+FROM S
+WHERE SOUNDEX(SNAME) = SOUNDEX('BLOKE');
+
+9.Display the Supplier name and the status (as Ten, Twenty, Thirty, etc.).
+
+SELECT SNAME,
+       CASE STATUS
+            WHEN 10 THEN 'Ten'
+            WHEN 20 THEN 'Twenty'
+            WHEN 30 THEN 'Thirty'
+            ELSE 'Other'
+       END AS StatusText
+FROM S;
+
+10.Display the current day (e.g. Thursday).
+
+SELECT TO_CHAR(SYSDATE, 'Day') AS CurrentDay
+FROM DUAL;

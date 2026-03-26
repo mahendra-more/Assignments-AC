@@ -1,0 +1,7 @@
+1.
+- The ANSI SQL standard defines date and time data types including DATE, TIME, and TIMESTAMP.
+- The standard format for DATE is YYYY-MM-DD.
+
+2.
+To insert values into tables, we use DML, specifically the INSERT INTO statement.
+

@@ -1,0 +1,81 @@
+CREATE TABLE tempp(
+num NUMBER,
+a NUMBER,
+b NUMBER,
+c NUMBER,
+year NUMBER,
+str1 VARCHAR2(50),
+str2 VARCHAR2(50)
+);
+
+1.Select from any table a number and determine whether it is within a given range (for 
+example, between 1 and 10). 
+->
+DECLARE
+    n NUMBER;
+BEGIN
+    SELECT num INTO n FROM tempp WHERE ROWNUM = 1;
+
+    IF n BETWEEN 1 AND 10 THEN
+        DBMS_OUTPUT.PUT_LINE('Number is within range 1 to 10');
+    ELSE
+        DBMS_OUTPUT.PUT_LINE('Number is outside range');
+    END IF;
+END;
+/
+
+ 
+2.Select from any table three positive integers representing the sides of a triangle, and 
+determine whether they form a valid triangle. Hint: In a triangle, the sum of any two 
+sides must always be greater than the third side. 
+->
+ DECLARE
+    x NUMBER;
+    y NUMBER;
+    z NUMBER;
+BEGIN
+    SELECT a,b,c INTO x,y,z FROM tempp WHERE ROWNUM=1;
+
+    IF (x+y>z) AND (x+z>y) AND (y+z>x) THEN
+        DBMS_OUTPUT.PUT_LINE('Valid Triangle');
+    ELSE
+        DBMS_OUTPUT.PUT_LINE('Not a Valid Triangle');
+    END IF;
+END;
+/
+
+
+3.Check if a given a year is a leap year. The condition is:- year should be (divisible by 4 
+and not divisible by 100) or (divisible by 4 and divisible by 400.). The year should be 
+Selected from some table. 
+->
+DECLARE
+    y NUMBER;
+BEGIN
+    SELECT year INTO y FROM tempp WHERE ROWNUM=1;
+
+    IF (MOD(y,4)=0 AND MOD(y,100)<>0) OR (MOD(y,400)=0) THEN
+        DBMS_OUTPUT.PUT_LINE('Leap Year');
+    ELSE
+        DBMS_OUTPUT.PUT_LINE('Not a Leap Year');
+    END IF;
+END;
+/
+
+ 
+4.Write a program that Selects from any table two character strings. Your program should 
+then determine if one character string exists inside another character string.
+->
+DECLARE
+    s1 VARCHAR2(50);
+    s2 VARCHAR2(50);
+BEGIN
+    SELECT str1, str2 INTO s1, s2 FROM tempp WHERE ROWNUM=1;
+
+    IF INSTR(s1, s2) > 0 THEN
+        DBMS_OUTPUT.PUT_LINE('String found inside another');
+    ELSE
+        DBMS_OUTPUT.PUT_LINE('String not found');
+    END IF;
+END;
+/

@@ -1,0 +1,19 @@
+1.
+SELECT Onum, Snum, Amt * 0.12 AS Commission
+FROM ORDERS;
+
+2.
+SELECT CONCAT('For the city ', City, ', the highest rating is : ', MAX(Rating))
+FROM CUSTOMERS
+GROUP BY City;
+
+3.
+SELECT Rating, Cname, Cnum
+FROM CUSTOMERS
+ORDER BY 1 DESC;
+
+4.
+SELECT Odate, SUM(Amt) 
+FROM ORDERS
+GROUP BY Odate
+ORDER BY 1 DESC;

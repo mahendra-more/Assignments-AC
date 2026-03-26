@@ -1,0 +1,59 @@
+1.
+SELECT MIN(STATUS) AS MinStatus
+FROM S;
+
+2.
+SELECT MAX(WEIGHT) AS MaxWeight
+FROM P;
+
+3.
+SELECT AVG(WEIGHT) AS AvgWeight
+FROM P;
+
+4.
+SELECT SUM(QTY) AS TotalQty
+FROM SPJ
+WHERE P# = 'P1';
+
+5.
+SELECT P#, SUM(QTY) AS TotalQty
+FROM SPJ
+GROUP BY P#;
+
+6.
+SELECT P#, AVG(QTY) AS AvgQty
+FROM SPJ
+GROUP BY P#;
+
+7.
+SELECT P#, MAX(QTY) AS MaxQty
+FROM SPJ
+GROUP BY P#
+HAVING MAX(QTY) > 800;
+
+8.
+SELECT STATUS, COUNT(*) AS SupplierCount
+FROM S
+GROUP BY STATUS;
+
+9.
+SELECT CITY, COUNT(*) AS ProjectCount
+FROM J
+GROUP BY CITY;
+
+10.
+ Difference between COUNT(Status) and COUNT(*)
+- COUNT(Status) → counts only rows where Status is NOT NULL.
+- COUNT(*) → counts all rows, regardless of whether Status is NULL.
+
+11.
+SELECT 
+    CASE STATUS
+        WHEN 10 THEN 'Ten'
+        WHEN 20 THEN 'Twenty'
+        WHEN 30 THEN 'Thirty'
+        ELSE 'Other'
+    END AS StatusText,
+    COUNT(*) AS Count
+FROM S
+GROUP BY STATUS;

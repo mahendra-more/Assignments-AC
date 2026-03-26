@@ -1,0 +1,143 @@
+1.Create the table SEMP with the following structure:- 
+ 
+ EMPNO CHAR(4) 
+ EMPNAME CHAR(20) 
+ BASIC FLOAT 
+ DEPTNO CHAR(2) 
+ DEPTHEAD CHAR(4)
+->
+CREATE TABLE SEMP (
+    EMPNO CHAR(4),
+    EMPNAME CHAR(20),
+    BASIC FLOAT,
+    DEPTNO CHAR(2),
+    DEPTHEAD CHAR(4)
+);
+
+2.Create the table SDEPT with the following structure:- 
+ 
+ DEPTNO CHAR(2) 
+ DEPTNAME CHAR(15) 
+->
+CREATE TABLE SDEPT (
+    DEPTNO CHAR(2),
+    DEPTNAME CHAR(15)
+);
+
+3.Insert into the SDEPT table the following values:- 
+ 
+10, Development 
+20, Training 
+->
+INSERT INTO SDEPT VALUES ('10', 'Development');
+INSERT INTO SDEPT VALUES ('20', 'Training');
+
+4.Insert into the SEMP table the following values:- 
+ 
+0001, SUNIL, 6000, 10 
+0002, HIREN, 8000, 20 
+0003, ALI, 4000, 10, 0001 
+0004, GEORGE, 6000, 0002
+->
+INSERT INTO SEMP VALUES ('0001', 'SUNIL', 6000, '10', NULL);
+INSERT INTO SEMP VALUES ('0002', 'HIREN', 8000, '20', NULL);
+INSERT INTO SEMP VALUES ('0003', 'ALI', 4000, '10', '0001');
+INSERT INTO SEMP VALUES ('0004', 'GEORGE', 6000, NULL, '0002');
+
+5.
+CREATE TABLE S (
+    S# CHAR(2),
+    SNAME CHAR(20),
+    STATUS INT,
+    CITY CHAR(15)
+);
+
+CREATE TABLE P (
+    P# CHAR(2),
+    PNAME CHAR(20),
+    COLOR CHAR(10),
+    WEIGHT FLOAT,
+    CITY CHAR(15)
+);
+
+CREATE TABLE J (
+    J# CHAR(2),
+    JNAME CHAR(20),
+    CITY CHAR(15)
+);
+
+
+CREATE TABLE SPJ (
+    S# CHAR(2),
+    P# CHAR(2),
+    J# CHAR(2),
+    QTY INT
+);
+
+INSERT INTO S VALUES ('S1', 'Smith', 20, 'London');
+INSERT INTO S VALUES ('S2', 'Jones', 10, 'Paris');
+INSERT INTO S VALUES ('S3', 'Blake', 30, 'Athens');
+
+INSERT INTO P VALUES ('P1', 'Bolt', 'Red', 12, 'London');
+INSERT INTO P VALUES ('P2', 'Nut', 'Blue', 14, 'Paris');
+INSERT INTO P VALUES ('P3', 'Screw', 'Green', 13, 'Athens');
+
+INSERT INTO J VALUES ('J1', 'Apollo', 'Athens');
+INSERT INTO J VALUES ('J2', 'Zeus', 'Paris');
+INSERT INTO J VALUES ('J3', 'Hermes', 'London');
+
+
+INSERT INTO SPJ VALUES ('S1', 'P1', 'J1', 100);
+INSERT INTO SPJ VALUES ('S2', 'P2', 'J2', 200);
+INSERT INTO SPJ VALUES ('S3', 'P3', 'J3', 150);
+
+5.Display all the data from the S table
+
+SELECT * FROM S;
+
+6.Display only the S# and SNAME fields from the S table. 
+
+SELECT S#, SNAME FROM S;
+
+7.Display the PNAME and COLOR from the P table for the CITY=”London”.
+
+SELECT S#, SNAME FROM S;
+
+8.Display all the Suppliers from London.
+
+SELECT * FROM S WHERE CITY = 'London';
+
+9.Display all the Suppliers from Paris or Athens. 
+
+SELECT * FROM S WHERE CITY IN ('Paris', 'Athens');
+
+10. Display all the Projects in Athens. 
+
+SELECT * FROM J WHERE CITY = 'Athens';
+
+11.Display all the Partnames with the weight between 12 and 14 (inclusive of both). 
+
+SELECT PNAME FROM P WHERE WEIGHT BETWEEN 12 AND 14;
+
+12.Display all the Suppliers with a Status greater than or equal to 20
+
+SELECT * FROM S WHERE STATUS >= 20;
+
+13.Display all the Suppliers except the Suppliers from London. 
+
+SELECT * FROM S WHERE CITY <> 'London';
+
+14.Display only the Cities from where the Suppliers come from
+
+SELECT DISTINCT CITY FROM S;
+
+15.Assuming that the Part Weight is in GRAMS, display the same in 
+MILLIGRAMS and KILOGRAMS.
+->
+SELECT 
+    PNAME,
+    WEIGHT AS GRAMS,
+    (WEIGHT * 1000) AS MILLIGRAMS,
+    (WEIGHT / 1000) AS KILOGRAMS
+FROM P;
+

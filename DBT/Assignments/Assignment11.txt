@@ -1,0 +1,33 @@
+1.
+SELECT *
+FROM orders
+WHERE cnum = (
+    SELECT cnum
+    FROM customers
+    WHERE cname = 'Cisneros'
+);
+
+2.
+SELECT c.cname, c.rating
+FROM customers c
+WHERE c.cnum IN (
+    SELECT o.cnum
+    FROM orders o
+    GROUP BY o.cnum
+    HAVING AVG(o.amt) > (
+        SELECT AVG(amt) 
+        FROM orders
+    )
+);
+
+3.
+SELECT s.sname, SUM(o.amt) AS total_sales
+FROM salespeople s
+JOIN orders o 
+    ON s.snum = o.snum
+GROUP BY s.sname
+HAVING SUM(o.amt) > (
+    SELECT MAX(amt) 
+    FROM orders
+);
+

@@ -1,0 +1,36 @@
+1.Create a view that shows all of the customers who have the highest ratings.
+->
+CREATE VIEW Highest_Rating_Customers AS
+SELECT *
+FROM Customers
+WHERE rating = (SELECT MAX(rating) FROM Customers);
+
+
+2.Create a view that shows the number of salespeople in each city.
+->
+CREATE VIEW Salespeople_Count_By_City AS
+SELECT city, COUNT(*) AS total_salespeople
+FROM Salespeople
+GROUP BY city;
+
+
+3.Create a view that shows the average and total orders for each salesperson after 
+his or her name. Assume all names are unique.
+->
+CREATE VIEW Salesperson_Order_Stats AS
+SELECT s.sname,
+       AVG(o.amt) AS average_order,
+       SUM(o.amt) AS total_order
+FROM Salespeople s
+JOIN Orders o
+ON s.snum = o.snum
+GROUP BY s.sname;
+
+
+4.Create a view that shows each salesperson with multiple customers
+->
+CREATE VIEW Salespeople_Multiple_Customers AS
+SELECT snum, COUNT(cnum) AS total_customers
+FROM Customers
+GROUP BY snum
+HAVING COUNT(cnum) > 1;

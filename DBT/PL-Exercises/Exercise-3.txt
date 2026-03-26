@@ -1,0 +1,122 @@
+1.Write a program containing a loop that iterates from 1 to 1000 using a variable I, 
+which is incremented each time around the loop. The program should output the 
+value of I every hundred iterations (i.e., the output should be 100, 200, etc.). 
+->
+DECLARE
+    i NUMBER;
+BEGIN
+    FOR i IN 1..1000 LOOP
+        IF MOD(i,100) = 0 THEN
+            DBMS_OUTPUT.PUT_LINE(i);
+        END IF;
+    END LOOP;
+END;
+/
+
+ 
+2.Write a program that examines all the numbers from 1 to 999, displaying all those 
+for which the sum of the cubes of the digits equal the number itself. 
+->
+ DECLARE
+    n NUMBER;
+    temp NUMBER;
+    d NUMBER;
+    sum1 NUMBER;
+BEGIN
+    FOR n IN 1..999 LOOP
+        temp := n;
+        sum1 := 0;
+
+        WHILE temp > 0 LOOP
+            d := MOD(temp,10);
+            sum1 := sum1 + d*d*d;
+            temp := FLOOR(temp/10);
+        END LOOP;
+
+        IF sum1 = n THEN
+            DBMS_OUTPUT.PUT_LINE('Armstrong Number: ' || n);
+        END IF;
+    END LOOP;
+END;
+/
+
+
+3.Write a program that Selects from any table a minimum and maximum value for a 
+radius, along with an increment factor, and generates a series of radii by repeatedly 
+adding the increment to the minimum until the maximum is reached. For each value 
+of the radius, compute and display the circumference, area, and volume of the 
+sphere. (Be sure to include both the maximum and the minimum values.). 
+->
+DECLARE
+    r NUMBER;
+    minr NUMBER;
+    maxr NUMBER;
+    inc NUMBER;
+BEGIN
+    SELECT minr, maxr, inc INTO minr, maxr, inc
+    FROM radius_table
+    WHERE ROWNUM = 1;
+
+    r := minr;
+
+    WHILE r <= maxr LOOP
+        DBMS_OUTPUT.PUT_LINE('Radius = ' || r);
+
+        DBMS_OUTPUT.PUT_LINE('Circumference = ' || 2*3.14*r);
+        DBMS_OUTPUT.PUT_LINE('Area = ' || 4*3.14*r*r);
+        DBMS_OUTPUT.PUT_LINE('Volume = ' || (4/3)*3.14*r*r*r);
+
+        r := r + inc;
+    END LOOP;
+END;
+/
+
+
+4.A palindrome is a word that is spelled the same forward and backward, such as 
+level, radar, etc. Write a program to Selects from any table a five letter word and 
+determine whether it is a palindrome. 
+->
+DECLARE
+    word VARCHAR2(10);
+    rev VARCHAR2(10) := '';
+    i NUMBER;
+BEGIN
+    SELECT word INTO word FROM word_table WHERE ROWNUM=1;
+
+    FOR i IN REVERSE 1..5 LOOP
+        rev := rev || SUBSTR(word,i,1);
+    END LOOP;
+
+    IF word = rev THEN
+        DBMS_OUTPUT.PUT_LINE('Palindrome');
+    ELSE
+        DBMS_OUTPUT.PUT_LINE('Not Palindrome');
+    END IF;
+END;
+/
+
+
+5.Modify the above program to Select from any table a variable length word. This 
+requires determining how many characters are read in.
+->
+DECLARE
+    word VARCHAR2(50);
+    rev VARCHAR2(50) := '';
+    i NUMBER;
+    len NUMBER;
+BEGIN
+    SELECT word INTO word FROM word_table WHERE ROWNUM=1;
+
+    len := LENGTH(word);
+
+    FOR i IN REVERSE 1..len LOOP
+        rev := rev || SUBSTR(word,i,1);
+    END LOOP;
+
+    IF word = rev THEN
+        DBMS_OUTPUT.PUT_LINE('Palindrome');
+    ELSE
+        DBMS_OUTPUT.PUT_LINE('Not Palindrome');
+    END IF;
+END;
+/
