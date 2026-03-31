@@ -1,4 +1,4 @@
-package Assi2;
+//package Assi2;
 
 public class Que1 {
 

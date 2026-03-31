@@ -1,4 +1,4 @@
-package Assi2;
+//package Assi2;
 import java.util.*;
 class Bill{
 	String name ;
