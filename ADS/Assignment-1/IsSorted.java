@@ -1,12 +1,12 @@
 public class IsSorted {
     public static boolean isSorted(int[] arr, int index) {
         if (index >= arr.length - 1) {
-            return true; // base case
+            return true; 
         }
         if (arr[index] > arr[index + 1]) {
-            return false; // violation found
+            return false;
         }
-        return isSorted(arr, index + 1); // recursive step
+        return isSorted(arr, index + 1); 
     }
 
     public static void main(String[] args) {

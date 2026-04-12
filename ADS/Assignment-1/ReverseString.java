@@ -1,9 +1,9 @@
 public class ReverseString {
     public static String reverseString(String s) {
         if (s == null || s.length() <= 1) {
-            return s; // base case
+            return s; 
         }
-        return reverseString(s.substring(1)) + s.charAt(0); // recursive step
+        return reverseString(s.substring(1)) + s.charAt(0); 
     }
 
     public static void main(String[] args) {
