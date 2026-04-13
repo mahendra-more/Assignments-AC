@@ -5,11 +5,12 @@ int main() {
     Library lib;
     int choice;
     do {
-        cout << "\n--- Library Menu ---\n";
+    	cout << "\n--- Library Menu ---\n";
         cout << "1. Add Book\n2. Display Books\n3. Add Member\n4. Display Members\n";
         cout << "5. Issue Book\n6. Return Book\n7. Save Data\n8. Load Data\n9. View Transactions\n0. Exit\n";
         cout << "Enter choice: ";
         cin >> choice;
+        
 
         try {
             if (choice == 1) {
