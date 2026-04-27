@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Exercise 2</title>
+</head>
+<body>
+
+<h3>Exercise 2: forEachElement</h3>
+<button onclick="run()">Run</button>
+
+<script>
+function forEachElement(arr, callback) {
+    for (let i = 0; i < arr.length; i++) {
+        callback(arr[i], i);
+    }
+}
+
+function run() {
+    let arr = [10, 20, 30];
+
+    forEachElement(arr, function(element, index) {
+        console.log("Index:", index, "Value:", element * 2);
+    });
+
+    alert("Check console");
+}
+</script>
+
+</body>
+</html>

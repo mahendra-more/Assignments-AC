@@ -1,0 +1,73 @@
+body {
+    font-family: Arial;
+    background: linear-gradient(to right, #cfd9df, #e2ebf0);
+}
+
+/* MAIN CARD */
+.container {
+    width: 800px;
+    margin: 80px auto;
+    display: flex;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+/* LEFT SIDE */
+.left {
+    width: 50%;
+    background: #f7f7f7;
+    padding: 40px;
+    text-align: center;
+}
+
+.left input {
+    width: 80%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 20px;
+    border: none;
+    background: #eee;
+}
+
+/* ICONS */
+.icons span {
+    display: inline-block;
+    border: 1px solid gray;
+    border-radius: 50%;
+    padding: 10px;
+    margin: 5px;
+}
+
+/* BUTTON */
+.signin {
+    background: #2c8ecb;
+    color: white;
+    border: none;
+    padding: 10px 30px;
+    border-radius: 20px;
+    margin-top: 10px;
+}
+
+/* RIGHT SIDE */
+.right {
+    width: 50%;
+    background: linear-gradient(to right, #2c8ecb, #3cb4e7);
+    color: white;
+    padding: 40px;
+    text-align: center;
+}
+
+.signup {
+    margin-top: 20px;
+    padding: 10px 30px;
+    border-radius: 20px;
+    border: 1px solid white;
+    background: transparent;
+    color: white;
+}
+
+/* TEXT */
+.forgot {
+    font-size: 12px;
+}

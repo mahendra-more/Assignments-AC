@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Exercise 4</title>
+</head>
+<body>
+
+<h3>Exercise 4: fetchData with error handling</h3>
+<button onclick="run()">Run</button>
+
+<script>
+function fetchData(url, callback) {
+    console.log("Fetching from:", url);
+
+    setTimeout(function() {
+        let error = false; // make true to test error
+
+        if (error) {
+            callback("Error occurred", null);
+        } else {
+            let response = "Data from " + url;
+            callback(null, response);
+        }
+    }, 2000);
+}
+
+function run() {
+    fetchData("https://example.com", function(err, res) {
+        if (err) {
+            console.error(err);
+            alert(err);
+        } else {
+            console.log(res);
+            alert(res);
+        }
+    });
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,64 @@
+body {
+    font-family: Arial;
+    background: #f2f2f2;
+}
+
+/* CENTER BOX */
+.container {
+    width: 350px;
+    margin: 80px auto;
+    background: white;
+    padding: 30px;
+    text-align: center;
+}
+
+/* TITLE */
+h1 {
+    margin-bottom: 30px;
+}
+
+/* INPUT STYLE */
+.input-box {
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.input-box label {
+    font-size: 14px;
+}
+
+/* UNDERLINE INPUT */
+.input-box input {
+    width: 100%;
+    border: none;
+    border-bottom: 2px solid gray;
+    padding: 8px 0;
+    outline: none;
+}
+
+/* LOGIN TEXT */
+.login-text {
+    font-size: 14px;
+}
+
+.login-text a {
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* BUTTON */
+button {
+    width: 100%;
+    padding: 10px;
+    background: black;
+    color: white;
+    border: none;
+    margin-top: 20px;
+}
+
+/* ERROR TEXT */
+.error {
+    color: red;
+    font-size: 13px;
+    margin-top: 15px;
+}

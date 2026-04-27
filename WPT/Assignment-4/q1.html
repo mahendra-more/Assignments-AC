@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Exercise 1</title>
+</head>
+<body>
+
+<h3>Exercise 1: processData with toUpperCase</h3>
+<button onclick="run()">Run</button>
+
+<script>
+function toUpperCase(str) {
+    return str.toUpperCase();
+}
+
+function processData(input, callback) {
+    let result = callback(input);
+    console.log(result);
+    alert(result);
+}
+
+function run() {
+    processData("hello world", toUpperCase);
+}
+</script>
+
+</body>
+</html>

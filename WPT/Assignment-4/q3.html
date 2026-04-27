@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Exercise 3</title>
+</head>
+<body>
+
+<h3>Exercise 3: fetchData (simulate API)</h3>
+<button onclick="run()">Run</button>
+
+<script>
+function fetchData(url, callback) {
+    console.log("Fetching from:", url);
+
+    setTimeout(function() {
+        let response = "Data from " + url;
+        callback(response);
+    }, 2000);
+}
+
+function run() {
+    fetchData("https://example.com", function(res) {
+        console.log(res);
+        alert(res);
+    });
+}
+</script>
+
+</body>
+</html>

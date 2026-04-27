@@ -1,0 +1,59 @@
+body {
+    font-family: Arial;
+    background: #eee;
+}
+
+/* MAIN BOX */
+.container {
+    width: 900px;
+    margin: 50px auto;
+    display: flex;
+    box-shadow: 0 0 10px gray;
+}
+
+/* LEFT PANEL */
+.left {
+    width: 40%;
+    padding: 30px;
+    color: white;
+    background: linear-gradient(to bottom right, #4b6cb7, #182848);
+}
+
+/* SOCIAL ICONS */
+.social span {
+    margin-right: 10px;
+    display: inline-block;
+    padding: 5px 10px;
+    background: rgba(255,255,255,0.3);
+}
+
+/* RIGHT PANEL */
+.right {
+    width: 60%;
+    padding: 30px;
+    background: white;
+}
+
+/* FORM INPUT */
+.right input,
+.right textarea {
+    width: 100%;
+    border: none;
+    border-bottom: 2px solid #ccc;
+    margin: 15px 0;
+    padding: 8px;
+    outline: none;
+}
+
+.right textarea {
+    height: 60px;
+}
+
+/* BUTTON */
+button {
+    width: 100%;
+    padding: 10px;
+    background: linear-gradient(to right, #4b6cb7, #182848);
+    color: white;
+    border: none;
+}

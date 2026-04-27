@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Exercise 5</title>
+</head>
+<body>
+
+<h3>Exercise 5: Nested Callbacks</h3>
+<button onclick="run()">Run</button>
+
+<script>
+function fetchData(url, callback) {
+    setTimeout(function() {
+        let error = false;
+
+        if (error) {
+            callback("Error fetching data", null);
+        } else {
+            let response = "Data from " + url;
+            callback(null, response);
+        }
+    }, 2000);
+}
+
+function processData(data, callback) {
+    let processed = data.toUpperCase() + " PROCESSED";
+    callback(processed);
+}
+
+function run() {
+    fetchData("https://example.com", function(err, res) {
+        if (err) {
+            console.error(err);
+            alert(err);
+        } else {
+            processData(res, function(finalData) {
+                console.log(finalData);
+                alert(finalData);
+            });
+        }
+    });
+}
+</script>
+
+</body>
+</html>

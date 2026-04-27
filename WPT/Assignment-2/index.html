@@ -1,0 +1,1237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lamborghini – Expect the Unexpected</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@300;400;500;600;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --gold: #c8a84b;
+      --gold-light: #e8c96a;
+      --gold-dark: #8a6e28;
+      --black: #0a0a0a;
+      --black2: #111111;
+      --black3: #1a1a1a;
+      --black4: #222222;
+      --white: #f5f5f0;
+      --gray: #888888;
+      --gray2: #555555;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+      cursor: none;
+    }
+
+    /* Custom Cursor */
+    .cursor {
+      width: 12px; height: 12px;
+      background: var(--gold);
+      border-radius: 50%;
+      position: fixed;
+      top: 0; left: 0;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: transform 0.1s ease, width 0.2s, height 0.2s, background 0.2s;
+    }
+    .cursor-ring {
+      width: 36px; height: 36px;
+      border: 1px solid var(--gold);
+      border-radius: 50%;
+      position: fixed;
+      top: 0; left: 0;
+      pointer-events: none;
+      z-index: 9998;
+      transform: translate(-50%, -50%);
+      transition: all 0.15s ease;
+      opacity: 0.6;
+    }
+    body:hover .cursor { transform: translate(-50%, -50%) scale(1); }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.2rem 4rem;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0) 100%);
+      transition: background 0.4s;
+    }
+    nav.scrolled {
+      background: rgba(0,0,0,0.97) !important;
+      border-bottom: 1px solid rgba(200,168,75,0.2);
+    }
+    .nav-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2rem;
+      color: var(--gold);
+      letter-spacing: 0.3rem;
+      text-decoration: none;
+    }
+    .nav-logo span { color: var(--white); }
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+    .nav-links a {
+      color: var(--white);
+      text-decoration: none;
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 600;
+      font-size: 0.85rem;
+      letter-spacing: 0.2rem;
+      text-transform: uppercase;
+      position: relative;
+      transition: color 0.3s;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px; left: 0;
+      width: 0; height: 1px;
+      background: var(--gold);
+      transition: width 0.3s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+    .nav-links a:hover::after { width: 100%; }
+    .nav-cta {
+      background: transparent;
+      border: 1px solid var(--gold);
+      color: var(--gold) !important;
+      padding: 0.5rem 1.5rem;
+      transition: background 0.3s, color 0.3s !important;
+    }
+    .nav-cta:hover { background: var(--gold) !important; color: var(--black) !important; }
+
+    /* HERO */
+    #home {
+      height: 100vh;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      overflow: hidden;
+      padding: 0 6rem;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background:
+        linear-gradient(105deg, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.5) 55%, rgba(0,0,0,0.1) 100%),
+        url('https://images.unsplash.com/photo-1621135802920-133df287f89c?w=1800&q=80') center/cover no-repeat;
+      transform: scale(1.05);
+      animation: slowZoom 12s ease forwards;
+    }
+    @keyframes slowZoom {
+      from { transform: scale(1.05); }
+      to { transform: scale(1.0); }
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 680px;
+    }
+    .hero-badge {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.35rem;
+      text-transform: uppercase;
+      color: var(--gold);
+      border: 1px solid var(--gold-dark);
+      padding: 0.4rem 1.2rem;
+      margin-bottom: 2rem;
+      animation: fadeUp 0.8s ease 0.2s both;
+    }
+    .hero-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(4rem, 9vw, 9rem);
+      line-height: 0.9;
+      letter-spacing: 0.02em;
+      margin-bottom: 1.5rem;
+      animation: fadeUp 0.8s ease 0.4s both;
+    }
+    .hero-title .highlight { color: var(--gold); }
+    .hero-subtitle {
+      font-size: 1.05rem;
+      font-weight: 300;
+      color: rgba(245,245,240,0.7);
+      letter-spacing: 0.05rem;
+      margin-bottom: 3rem;
+      max-width: 480px;
+      line-height: 1.8;
+      animation: fadeUp 0.8s ease 0.6s both;
+    }
+    .hero-btns {
+      display: flex;
+      gap: 1.2rem;
+      animation: fadeUp 0.8s ease 0.8s both;
+    }
+    .btn-primary {
+      display: inline-block;
+      background: var(--gold);
+      color: var(--black);
+      padding: 1rem 2.5rem;
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 0.2rem;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: background 0.3s, transform 0.2s;
+      clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 100%, 12px 100%);
+    }
+    .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
+    .btn-secondary {
+      display: inline-block;
+      background: transparent;
+      color: var(--white);
+      padding: 1rem 2.5rem;
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 600;
+      font-size: 0.85rem;
+      letter-spacing: 0.2rem;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: 1px solid rgba(245,245,240,0.4);
+      transition: border-color 0.3s, color 0.3s;
+    }
+    .btn-secondary:hover { border-color: var(--gold); color: var(--gold); }
+    .hero-scroll {
+      position: absolute;
+      bottom: 2.5rem; left: 50%;
+      transform: translateX(-50%);
+      display: flex; flex-direction: column;
+      align-items: center; gap: 0.5rem;
+      z-index: 2;
+      opacity: 0.5;
+      animation: bounce 2s infinite;
+    }
+    .hero-scroll span {
+      font-size: 0.65rem; letter-spacing: 0.25rem; text-transform: uppercase;
+    }
+    .hero-scroll-line {
+      width: 1px; height: 50px;
+      background: linear-gradient(to bottom, var(--gold), transparent);
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(8px); }
+    }
+
+    /* STATS BAR */
+    .stats-bar {
+      background: var(--black2);
+      border-top: 1px solid rgba(200,168,75,0.2);
+      border-bottom: 1px solid rgba(200,168,75,0.2);
+      padding: 2rem 6rem;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+    }
+    .stat-item { text-align: center; }
+    .stat-num {
+      font-family: 'Orbitron', monospace;
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: var(--gold);
+    }
+    .stat-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.2rem;
+      text-transform: uppercase;
+      color: var(--gray);
+      margin-top: 0.3rem;
+    }
+
+    /* SECTION HEADER */
+    .section-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+    .section-tag {
+      font-size: 0.7rem;
+      letter-spacing: 0.4rem;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1rem;
+      display: block;
+    }
+    .section-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.5rem, 5vw, 4.5rem);
+      line-height: 1;
+      letter-spacing: 0.05em;
+    }
+    .section-line {
+      width: 60px; height: 2px;
+      background: var(--gold);
+      margin: 1.5rem auto 0;
+    }
+
+    /* MODELS PAGE */
+    #models {
+      padding: 8rem 4rem;
+      background: var(--black);
+    }
+    .models-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 2px;
+    }
+    .model-card {
+      position: relative;
+      overflow: hidden;
+      cursor: none;
+      height: 480px;
+    }
+    .model-img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.7s ease;
+      filter: brightness(0.65);
+    }
+    .model-card:hover .model-img { transform: scale(1.08); filter: brightness(0.45); }
+    .model-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, transparent 60%);
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      transition: background 0.4s;
+    }
+    .model-card:hover .model-overlay {
+      background: linear-gradient(to top, rgba(0,0,0,0.98) 30%, rgba(0,0,0,0.3) 100%);
+    }
+    .model-tag {
+      font-size: 0.65rem;
+      letter-spacing: 0.3rem;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.5rem;
+    }
+    .model-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.8rem;
+      letter-spacing: 0.1em;
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+    .model-specs {
+      display: flex;
+      gap: 1.5rem;
+      margin-bottom: 1rem;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all 0.4s ease 0.1s;
+    }
+    .model-card:hover .model-specs { opacity: 1; transform: translateY(0); }
+    .spec {
+      display: flex; flex-direction: column;
+    }
+    .spec-val {
+      font-family: 'Orbitron', monospace;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--gold);
+    }
+    .spec-name {
+      font-size: 0.65rem;
+      letter-spacing: 0.15rem;
+      text-transform: uppercase;
+      color: var(--gray);
+    }
+    .model-desc {
+      font-size: 0.9rem;
+      color: rgba(245,245,240,0.6);
+      line-height: 1.6;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all 0.4s ease 0.2s;
+      margin-bottom: 1.2rem;
+    }
+    .model-card:hover .model-desc { opacity: 1; transform: translateY(0); }
+    .model-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.75rem;
+      letter-spacing: 0.2rem;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--gold);
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all 0.4s ease 0.3s;
+      cursor: none;
+    }
+    .model-cta::after {
+      content: '→';
+      transition: transform 0.2s;
+    }
+    .model-cta:hover::after { transform: translateX(4px); }
+    .model-card:hover .model-cta { opacity: 1; transform: translateY(0); }
+
+    /* ABOUT */
+    #about {
+      padding: 8rem 4rem;
+      background: var(--black2);
+      position: relative;
+      overflow: hidden;
+    }
+    #about::before {
+      content: 'LAMBORGHINI';
+      position: absolute;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 18vw;
+      color: rgba(200,168,75,0.03);
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      white-space: nowrap;
+      pointer-events: none;
+      letter-spacing: 0.1em;
+    }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+    .about-image-wrap {
+      position: relative;
+    }
+    .about-image {
+      width: 100%;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+      filter: grayscale(20%);
+    }
+    .about-image-accent {
+      position: absolute;
+      bottom: -1.5rem;
+      right: -1.5rem;
+      width: 60%;
+      aspect-ratio: 16/9;
+      border: 3px solid var(--gold);
+      z-index: -1;
+    }
+    .about-badge {
+      display: inline-block;
+      background: var(--gold);
+      color: var(--black);
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.3rem;
+      text-transform: uppercase;
+      padding: 0.4rem 1rem;
+      margin-bottom: 1.5rem;
+    }
+    .about-text h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      line-height: 1.05;
+      margin-bottom: 1.5rem;
+    }
+    .about-text h2 span { color: var(--gold); }
+    .about-text p {
+      font-size: 1rem;
+      color: rgba(245,245,240,0.65);
+      line-height: 1.9;
+      margin-bottom: 1.2rem;
+      font-weight: 300;
+    }
+    .about-milestones {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-top: 2.5rem;
+    }
+    .milestone {
+      border-left: 2px solid var(--gold);
+      padding-left: 1rem;
+    }
+    .milestone-year {
+      font-family: 'Orbitron', monospace;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--gold);
+    }
+    .milestone-text {
+      font-size: 0.85rem;
+      color: var(--gray);
+      margin-top: 0.2rem;
+    }
+
+    /* HERITAGE STRIP */
+    .heritage-strip {
+      padding: 5rem 4rem;
+      background: var(--gold);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+    .heritage-strip h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      color: var(--black);
+      line-height: 1;
+    }
+    .heritage-strip p {
+      color: rgba(0,0,0,0.7);
+      line-height: 1.8;
+      font-size: 1rem;
+    }
+    .heritage-strip .btn-dark {
+      display: inline-block;
+      background: var(--black);
+      color: var(--gold);
+      padding: 1rem 2.5rem;
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 0.2rem;
+      text-transform: uppercase;
+      text-decoration: none;
+      margin-top: 1.5rem;
+      transition: background 0.3s;
+    }
+    .heritage-strip .btn-dark:hover { background: var(--black3); }
+
+    /* CONTACT */
+    #contact {
+      padding: 8rem 4rem;
+      background: var(--black);
+    }
+    .contact-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 6rem;
+      align-items: start;
+    }
+    .contact-info h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      margin-bottom: 1.5rem;
+      line-height: 1;
+    }
+    .contact-info h2 span { color: var(--gold); }
+    .contact-info p {
+      color: rgba(245,245,240,0.55);
+      line-height: 1.9;
+      font-size: 0.95rem;
+      font-weight: 300;
+      margin-bottom: 2rem;
+    }
+    .contact-detail {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    .contact-icon {
+      width: 40px; height: 40px;
+      border: 1px solid var(--gold-dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      color: var(--gold);
+      flex-shrink: 0;
+    }
+    .contact-detail-text {
+      font-size: 0.9rem;
+      color: var(--gray);
+      line-height: 1.7;
+    }
+    .contact-detail-text strong {
+      display: block;
+      color: var(--white);
+      font-size: 0.8rem;
+      letter-spacing: 0.15rem;
+      text-transform: uppercase;
+      margin-bottom: 0.2rem;
+    }
+
+    /* FORM */
+    .contact-form {
+      background: var(--black2);
+      padding: 3rem;
+      border: 1px solid rgba(200,168,75,0.15);
+    }
+    .form-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.8rem;
+      color: var(--gold);
+      letter-spacing: 0.1em;
+      margin-bottom: 2rem;
+    }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.2rem;
+    }
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+    .form-group label {
+      display: block;
+      font-size: 0.7rem;
+      letter-spacing: 0.2rem;
+      text-transform: uppercase;
+      color: var(--gray);
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      background: var(--black3);
+      border: 1px solid rgba(200,168,75,0.2);
+      color: var(--white);
+      padding: 0.9rem 1rem;
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.3s;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--gold);
+    }
+    .form-group select option { background: var(--black3); }
+    .form-group textarea { resize: vertical; min-height: 120px; }
+    .form-submit {
+      width: 100%;
+      background: var(--gold);
+      color: var(--black);
+      border: none;
+      padding: 1.1rem;
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 700;
+      font-size: 0.9rem;
+      letter-spacing: 0.25rem;
+      text-transform: uppercase;
+      cursor: none;
+      transition: background 0.3s, transform 0.2s;
+      clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 100%, 10px 100%);
+    }
+    .form-submit:hover { background: var(--gold-light); transform: translateY(-1px); }
+    .form-success {
+      display: none;
+      text-align: center;
+      padding: 2rem;
+    }
+    .form-success .check {
+      font-size: 3rem;
+      color: var(--gold);
+      display: block;
+      margin-bottom: 1rem;
+    }
+    .form-success p {
+      color: rgba(245,245,240,0.7);
+      font-size: 1rem;
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--black2);
+      border-top: 1px solid rgba(200,168,75,0.15);
+      padding: 4rem;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 3rem;
+      margin-bottom: 3rem;
+    }
+    .footer-brand .logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.8rem;
+      color: var(--gold);
+      letter-spacing: 0.3rem;
+      margin-bottom: 1rem;
+      display: block;
+    }
+    .footer-brand p {
+      color: var(--gray);
+      font-size: 0.88rem;
+      line-height: 1.8;
+      max-width: 260px;
+    }
+    .footer-col h4 {
+      font-size: 0.7rem;
+      letter-spacing: 0.25rem;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.2rem;
+      font-weight: 700;
+    }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 0.6rem; }
+    .footer-col ul li a {
+      color: var(--gray);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.3s;
+    }
+    .footer-col ul li a:hover { color: var(--gold); }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding-top: 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .footer-bottom p {
+      font-size: 0.8rem;
+      color: var(--gray2);
+      letter-spacing: 0.05rem;
+    }
+    .social-links {
+      display: flex;
+      gap: 1rem;
+    }
+    .social-link {
+      width: 36px; height: 36px;
+      border: 1px solid rgba(200,168,75,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gray);
+      text-decoration: none;
+      font-size: 0.8rem;
+      font-weight: 700;
+      transition: border-color 0.3s, color 0.3s;
+    }
+    .social-link:hover { border-color: var(--gold); color: var(--gold); }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* MOBILE MENU */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: none;
+      background: none;
+      border: none;
+    }
+    .hamburger span {
+      width: 24px; height: 1.5px;
+      background: var(--white);
+      transition: all 0.3s;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 1024px) {
+      nav { padding: 1rem 2rem; }
+      #home { padding: 0 3rem; }
+      .stats-bar { padding: 2rem 2rem; }
+      #models, #about, #contact, footer { padding: 6rem 2rem; }
+      .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .contact-wrap { grid-template-columns: 1fr; gap: 3rem; }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+      .heritage-strip { grid-template-columns: 1fr; gap: 2rem; padding: 4rem 2rem; }
+    }
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .nav-links.open {
+        display: flex; flex-direction: column;
+        position: fixed; top: 0; right: 0;
+        height: 100vh; width: 70%;
+        background: rgba(0,0,0,0.98);
+        padding: 5rem 2rem;
+        gap: 2rem;
+        border-left: 1px solid rgba(200,168,75,0.2);
+      }
+      .hamburger { display: flex; }
+      #home { padding: 0 1.5rem; }
+      .hero-title { font-size: 4rem; }
+      .stats-bar { grid-template-columns: 1fr 1fr; padding: 1.5rem; }
+      .models-grid { grid-template-columns: 1fr; }
+      .about-milestones { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Custom Cursor -->
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <!-- NAVIGATION -->
+  <nav id="navbar">
+    <a href="#home" class="nav-logo">LAMBO<span>RGHINI</span></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#models">Models</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="#contact" class="nav-cta">Configure</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- HOME / HERO -->
+  <section id="home">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+      <div class="hero-badge">Sant'Agata Bolognese · Since 1963</div>
+      <h1 class="hero-title">EXPECT<br>THE <span class="highlight">UN</span>EXPECTED</h1>
+      <p class="hero-subtitle">Automobili Lamborghini — where extreme performance meets Italian artistry. Born from passion. Built to defy limits.</p>
+      <div class="hero-btns">
+        <a href="#models" class="btn-primary">Explore Models</a>
+        <a href="#about" class="btn-secondary">Our Legacy</a>
+      </div>
+    </div>
+    <div class="hero-scroll">
+      <span>Scroll</span>
+      <div class="hero-scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- STATS BAR -->
+  <div class="stats-bar reveal">
+    <div class="stat-item">
+      <div class="stat-num" data-target="830">0</div>
+      <div class="stat-label">Horsepower (Revuelto)</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num" data-target="2">0</div>
+      <div class="stat-label">Seconds 0–100 km/h</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num" data-target="61">0</div>
+      <div class="stat-num-suffix" style="display:none">+</div>
+      <div class="stat-label">Years of Innovation</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num" data-target="10000">0</div>
+      <div class="stat-label">Cars Produced Annually</div>
+    </div>
+  </div>
+
+  <!-- MODELS -->
+  <section id="models">
+    <div class="section-header reveal">
+      <span class="section-tag">The Collection</span>
+      <h2 class="section-title">OUR MODELS</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="models-grid reveal">
+
+      <div class="model-card">
+        <img class="model-img" src="https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=900&q=80" alt="Lamborghini Revuelto" loading="lazy" />
+        <div class="model-overlay">
+          <div class="model-tag">Super Sports Car</div>
+          <div class="model-name">REVUELTO</div>
+          <div class="model-specs">
+            <div class="spec">
+              <span class="spec-val">830</span>
+              <span class="spec-name">HP</span>
+            </div>
+            <div class="spec">
+              <span class="spec-val">2.5s</span>
+              <span class="spec-name">0–100</span>
+            </div>
+            <div class="spec">
+              <span class="spec-val">350+</span>
+              <span class="spec-name">km/h</span>
+            </div>
+          </div>
+          <p class="model-desc">The first HPEV Lamborghini — a hybrid V12 masterpiece pushing the boundaries of automotive physics.</p>
+          <span class="model-cta">Discover More </span>
+        </div>
+      </div>
+
+      <div class="model-card">
+        <img class="model-img" src="https://images.unsplash.com/photo-1555652736-e92021d28a10?w=900&q=80" alt="Lamborghini Urus" loading="lazy" />
+        <div class="model-overlay">
+          <div class="model-tag">Super SUV</div>
+          <div class="model-name">URUS SE</div>
+          <div class="model-specs">
+            <div class="spec">
+              <span class="spec-val">800</span>
+              <span class="spec-name">HP</span>
+            </div>
+            <div class="spec">
+              <span class="spec-val">3.4s</span>
+              <span class="spec-name">0–100</span>
+            </div>
+            <div class="spec">
+              <span class="spec-val">312</span>
+              <span class="spec-name">km/h</span>
+            </div>
+          </div>
+          <p class="model-desc">The world's first Super SUV with a hybrid powertrain — redefining the concept of versatility and performance.</p>
+          <span class="model-cta">Discover More </span>
+        </div>
+      </div>
+
+      <div class="model-card">
+        <img class="model-img" src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?w=900&q=80" alt="Lamborghini Huracan" loading="lazy" />
+        <div class="model-overlay">
+          <div class="model-tag">V10 Sports Car</div>
+          <div class="model-name">HURACÁN</div>
+          <div class="model-specs">
+            <div class="spec">
+              <span class="spec-val">640</span>
+              <span class="spec-name">HP</span>
+            </div>
+            <div class="spec">
+              <span class="spec-val">2.9s</span>
+              <span class="spec-name">0–100</span>
+            </div>
+            <div class="spec">
+              <span class="spec-val">325</span>
+              <span class="spec-name">km/h</span>
+            </div>
+          </div>
+          <p class="model-desc">The screaming V10 legend — naturally aspirated, uncompromising, and a love letter to pure driving.</p>
+          <span class="model-cta">Discover More </span>
+        </div>
+      </div>
+
+      <div class="model-card">
+        <img class="model-img" src="https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?w=900&q=80" alt="Lamborghini SC63" loading="lazy" />
+        <div class="model-overlay">
+          <div class="model-tag">Motorsport</div>
+          <div class="model-name">SC63</div>
+          <div class="model-specs">
+            <div class="spec">
+              <span class="spec-val">850</span>
+              <span class="spec-name">HP+</span>
+            </div>
+            <div class="spec">
+              <span class="spec-val">LMGT3</span>
+              <span class="spec-name">Class</span>
+            </div>
+            <div class="spec">
+              <span class="spec-val">V8</span>
+              <span class="spec-name">Hybrid</span>
+            </div>
+          </div>
+          <p class="model-desc">Born on the racetrack. The SC63 hybrid prototype represents Lamborghini's peak motorsport ambition.</p>
+          <span class="model-cta">Discover More </span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="about-grid">
+      <div class="about-image-wrap reveal">
+        <img class="about-image" src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80" alt="Lamborghini Factory" loading="lazy" />
+        <div class="about-image-accent"></div>
+      </div>
+      <div class="about-text reveal">
+        <span class="about-badge">Our Story</span>
+        <h2>THE BULL THAT <span>DEFIED</span> THE WORLD</h2>
+        <p>Ferruccio Lamborghini, a successful tractor manufacturer, founded Automobili Lamborghini in 1963 in Sant'Agata Bolognese, Italy. Driven by a personal dispute with Enzo Ferrari, he set out to build the perfect grand touring car.</p>
+        <p>What followed was more than a rivalry — it was the birth of a new automotive philosophy. Extreme design, raw power, and Italian craftsmanship fused into machines that defy convention and ignite passion in every soul that encounters them.</p>
+        <p>Today, Lamborghini is owned by the Volkswagen Group through Audi and stands as the pinnacle of super sports car engineering, entering a bold new era of electrification without sacrificing its soul.</p>
+        <div class="about-milestones">
+          <div class="milestone">
+            <div class="milestone-year">1963</div>
+            <div class="milestone-text">Founded by Ferruccio Lamborghini</div>
+          </div>
+          <div class="milestone">
+            <div class="milestone-year">1966</div>
+            <div class="milestone-text">Miura — the first supercar</div>
+          </div>
+          <div class="milestone">
+            <div class="milestone-year">1974</div>
+            <div class="milestone-text">Countach shocks the world</div>
+          </div>
+          <div class="milestone">
+            <div class="milestone-year">2023</div>
+            <div class="milestone-text">Revuelto ushers in hybrid era</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HERITAGE STRIP -->
+  <div class="heritage-strip reveal">
+    <div>
+      <h2>ENGINEERED<br>IN ITALY.<br>DRIVEN EVERYWHERE.</h2>
+    </div>
+    <div>
+      <p>Every Lamborghini is a hand-crafted work of art. Our Sant'Agata Bolognese factory is where Italian passion, German engineering precision, and cutting-edge technology converge to produce the most extraordinary cars on the planet.</p>
+      <a href="#contact" class="btn-dark">Request a Visit</a>
+    </div>
+  </div>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="section-header reveal">
+      <span class="section-tag">Get In Touch</span>
+      <h2 class="section-title">CONTACT US</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="contact-wrap">
+      <div class="contact-info reveal">
+        <h2>LET'S START A <span>CONVERSATION</span></h2>
+        <p>Whether you're interested in a new Lamborghini, exploring bespoke Ad Personam configurations, or simply want to learn more about our world — we're here for you.</p>
+        <div class="contact-detail">
+          <div class="contact-icon">✦</div>
+          <div class="contact-detail-text">
+            <strong>Headquarters</strong>
+            Via Modena 12, 40019 Sant'Agata Bolognese, Bologna, Italy
+          </div>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-icon">✆</div>
+          <div class="contact-detail-text">
+            <strong>Global Hotline</strong>
+            +39 051 681 7111
+          </div>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-icon">✉</div>
+          <div class="contact-detail-text">
+            <strong>Email</strong>
+            info@lamborghini.com
+          </div>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-icon">◷</div>
+          <div class="contact-detail-text">
+            <strong>Office Hours</strong>
+            Monday – Friday: 9:00 AM – 6:00 PM CET
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-form reveal" id="contactForm">
+        <div class="form-title">SEND A MESSAGE</div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="fname">First Name</label>
+            <input type="text" id="fname" placeholder="Ferruccio" />
+          </div>
+          <div class="form-group">
+            <label for="lname">Last Name</label>
+            <input type="text" id="lname" placeholder="Lamborghini" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" placeholder="you@example.com" />
+        </div>
+        <div class="form-group">
+          <label for="phone">Phone Number</label>
+          <input type="tel" id="phone" placeholder="+1 000 000 0000" />
+        </div>
+        <div class="form-group">
+          <label for="interest">I'm Interested In</label>
+          <select id="interest">
+            <option value="">Select a model or service</option>
+            <option>Revuelto</option>
+            <option>Urus SE</option>
+            <option>Huracán</option>
+            <option>SC63 Motorsport</option>
+            <option>Ad Personam Customization</option>
+            <option>Lamborghini Lounge</option>
+            <option>General Enquiry</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="message">Your Message</label>
+          <textarea id="message" placeholder="Tell us about your dream Lamborghini..."></textarea>
+        </div>
+        <button class="form-submit" id="submitBtn" type="button" onclick="submitForm()">Send Message</button>
+
+        <div class="form-success" id="formSuccess">
+          <span class="check">✦</span>
+          <p style="font-family:'Bebas Neue',sans-serif; font-size:1.8rem; color:var(--gold); letter-spacing:0.1em;">GRAZIE!</p>
+          <p>Your message has been received. Our team will contact you within 24 hours.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <span class="logo">LAMBORGHINI</span>
+        <p>Automobili Lamborghini S.p.A. — crafting the world's most extraordinary super sports cars since 1963 in Sant'Agata Bolognese, Italy.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Models</h4>
+        <ul>
+          <li><a href="#models">Revuelto</a></li>
+          <li><a href="#models">Urus SE</a></li>
+          <li><a href="#models">Huracán</a></li>
+          <li><a href="#models">SC63</a></li>
+          <li><a href="#models">Ad Personam</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#about">Our Story</a></li>
+          <li><a href="#about">Heritage</a></li>
+          <li><a href="#about">Motorsport</a></li>
+          <li><a href="#about">Sustainability</a></li>
+          <li><a href="#contact">Careers</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Experience</h4>
+        <ul>
+          <li><a href="#contact">Test Drive</a></li>
+          <li><a href="#contact">Factory Tour</a></li>
+          <li><a href="#contact">Lounge Visit</a></li>
+          <li><a href="#contact">Find a Dealer</a></li>
+          <li><a href="#contact">Media Enquiries</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Automobili Lamborghini S.p.A. — All rights reserved. Made with passion in Italy.</p>
+      <div class="social-links">
+        <a href="#" class="social-link">IN</a>
+        <a href="#" class="social-link">IG</a>
+        <a href="#" class="social-link">YT</a>
+        <a href="#" class="social-link">TW</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Custom cursor
+    const cursor = document.getElementById('cursor');
+    const ring = document.getElementById('cursorRing');
+    document.addEventListener('mousemove', e => {
+      cursor.style.left = e.clientX + 'px';
+      cursor.style.top = e.clientY + 'px';
+      setTimeout(() => {
+        ring.style.left = e.clientX + 'px';
+        ring.style.top = e.clientY + 'px';
+      }, 80);
+    });
+    document.querySelectorAll('a, button, .model-card, .form-submit').forEach(el => {
+      el.addEventListener('mouseenter', () => {
+        cursor.style.transform = 'translate(-50%,-50%) scale(2.5)';
+        cursor.style.background = '#e8c96a';
+        ring.style.opacity = '0.2';
+      });
+      el.addEventListener('mouseleave', () => {
+        cursor.style.transform = 'translate(-50%,-50%) scale(1)';
+        cursor.style.background = '#c8a84b';
+        ring.style.opacity = '0.6';
+      });
+    });
+
+    // Nav scroll
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 60);
+    });
+
+    // Hamburger menu
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('navLinks');
+    hamburger.addEventListener('click', () => {
+      navLinks.classList.toggle('open');
+    });
+    navLinks.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => navLinks.classList.remove('open'));
+    });
+
+    // Scroll reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('visible'), i * 80);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    reveals.forEach(el => observer.observe(el));
+
+    // Counter animation
+    function animateCount(el) {
+      const target = +el.dataset.target;
+      const duration = 2000;
+      const step = target / (duration / 16);
+      let current = 0;
+      const timer = setInterval(() => {
+        current = Math.min(current + step, target);
+        el.textContent = target >= 1000
+          ? Math.floor(current).toLocaleString()
+          : (target < 10 ? current.toFixed(1) : Math.floor(current));
+        if (current >= target) clearInterval(timer);
+      }, 16);
+    }
+    const statObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.querySelectorAll('[data-target]').forEach(animateCount);
+          statObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.3 });
+    document.querySelectorAll('.stats-bar').forEach(el => statObserver.observe(el));
+
+    // Form submission
+    function submitForm() {
+      const fname = document.getElementById('fname').value.trim();
+      const email = document.getElementById('email').value.trim();
+      if (!fname || !email) {
+        document.getElementById('fname').style.borderColor = fname ? '' : '#e24b4a';
+        document.getElementById('email').style.borderColor = email ? '' : '#e24b4a';
+        return;
+      }
+      document.getElementById('submitBtn').style.display = 'none';
+      document.querySelectorAll('.form-group').forEach(g => g.style.display = 'none');
+      document.querySelector('.form-row').style.display = 'none';
+      document.querySelector('.form-title').style.display = 'none';
+      document.getElementById('formSuccess').style.display = 'block';
+    }
+  </script>
+</body>
+</html>

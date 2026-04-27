@@ -1,0 +1,63 @@
+body {
+    font-family: Arial;
+    background: #eee;
+}
+
+/* TITLE */
+h2 {
+    text-align: center;
+}
+
+/* MAIN BOX */
+.container {
+    width: 900px;
+    margin: auto;
+    background: white;
+    padding: 10px;
+}
+
+/* FORM ROW */
+.form-row {
+    display: grid;
+    grid-template-columns: 200px 1fr 250px;
+    align-items: center;
+    padding: 10px;
+}
+
+/* STRIPED EFFECT */
+.form-row:nth-child(even) {
+    background: #e3eaf0;
+}
+
+.form-row:nth-child(odd) {
+    background: #d5dee6;
+}
+
+/* LABEL */
+label {
+    font-weight: bold;
+}
+
+/* INPUT */
+input {
+    padding: 6px;
+    width: 90%;
+}
+
+/* NOTE TEXT */
+span {
+    font-size: 12px;
+}
+
+/* BUTTON */
+.btn {
+    text-align: center;
+    margin-top: 15px;
+}
+
+button {
+    padding: 8px 20px;
+    background: blue;
+    color: white;
+    border: none;
+}
